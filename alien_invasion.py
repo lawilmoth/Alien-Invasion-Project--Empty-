@@ -7,6 +7,9 @@ Page 227 of the book.agee 265 of the PDF
 import sys
 import pygame
 
+from settings import Settings
+from ship import Ship
+
 class AlienInvasion:
     '''Manages the game and create resources'''
 
@@ -14,8 +17,13 @@ class AlienInvasion:
         '''Initialized the game'''
         pygame.init()
 
-        self.screen = pygame.display.set_mode((1200, 800))
+        self.settings = Settings()
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        
+        self.ship = Ship(self)
+        
         pygame.display.set_caption('Alien Invasion')
+
 
 
     def run_game(self):
@@ -26,6 +34,11 @@ class AlienInvasion:
                 if event.type == pygame.QUIT:
                     sys.exit()    
 
+            self.screen.fill(self.settings.bg_color)
+            self.ship.blitme()
+
+            #displays the screen
+            pygame.display.flip()
 
 if __name__ == '__main__':
     ai = AlienInvasion()
