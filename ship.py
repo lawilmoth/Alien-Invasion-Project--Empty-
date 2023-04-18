@@ -15,6 +15,6 @@ class Ship:
         #the ship will have the same middle as the screen.
         self.rect.midbottom = self.screen_rect.midbottom
 
-    def blitme(self):
+    def blitme(self): 
         '''Draws the ship on the screen'''
         self.screen.blit(self.image, self.rect)
