@@ -15,6 +15,18 @@ class Ship:
         #the ship will have the same middle as the screen.
         self.rect.midbottom = self.screen_rect.midbottom
 
+        self.moving_right = False
+        self.moving_left = False
+        
+
+    def update(self):
+        '''Update the ship's position'''
+        if self.moving_right:
+            self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
+    
     def blitme(self): 
         '''Draws the ship on the screen'''
         self.screen.blit(self.image, self.rect)
+
