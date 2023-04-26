@@ -14,6 +14,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
+from button import Button
 
 
 class AlienInvasion:
@@ -31,11 +32,13 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
         self.stats = GameStats(self)
+        self.play_button = Button(self, "Play")
 
         pygame.display.set_caption("Alien Invasion")
 
     def run_game(self):
         """Control the loop for the game"""
+        self._update_screen()
         while True:
             # Look for keyboard and mouse events
             self._check_events()
@@ -153,6 +156,15 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
+
+    def _check_play_button(self, mouse_pos):
+        """Start the game"""
+        if self.play_button.rect.collidepoint(mouse_pos):
+            self.stats.game_active = True
+
     def _update_screen(self):
         """Updates images and flips the screen"""
         self.screen.fill(self.settings.bg_color)
@@ -160,6 +172,10 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        if not self.stats.game_active:
+            self.play_button.draw_button()
+
         # displays the screen
         pygame.display.flip()
 
