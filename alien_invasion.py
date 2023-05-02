@@ -72,6 +72,7 @@ class AlienInvasion:
         # Lose a life
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
             # Get rid of any aliens and bullets
             self.aliens.empty()
             self.bullets.empty()
@@ -178,6 +179,11 @@ class AlienInvasion:
         if button_clicked and not self.stats.game_active:
             self.stats.reset_stats()
             self.settings.initialize_dynamic_settings()
+
+            self.sb.prep_level()
+            self.sb.prep_score()
+            self.sb.prep_ships()
+
             self.stats.game_active = True
 
             # Get rid of any extra aliens/bullets
