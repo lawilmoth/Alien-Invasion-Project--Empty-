@@ -27,5 +27,6 @@ class Button:
         self.msg_image_rect.center = self.rect.center
 
     def draw_button(self):
-        self.screen.fill(self.button_color, self.rect)
+        # self.screen.fill(self.button_color, self.rect)
+        pygame.draw.rect(self.screen, self.button_color, self.rect, 0, 5)
         self.screen.blit(self.msg_image, self.msg_image_rect)
